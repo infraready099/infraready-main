@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
 
   // Send a quick confirmation email to the user
   await resend.emails.send({
-    from: "Kay at InfraReady <kay@infraready.io>",
+    from: "InfraReady <hello@infraready.io>",
     to: email,
     subject: "You're on the InfraReady waitlist 🚀",
     html: `
