@@ -3,6 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+async function getAudienceId(): Promise<string | null> {
+  const { data, error } = await resend.audiences.list();
+  if (error || !data?.data?.length) return null;
+  return data.data[0].id;
+}
+
 export async function POST(req: NextRequest) {
   const { email } = await req.json();
 
@@ -10,10 +16,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
   }
 
-  // Add to Resend Audience
-  const audienceId = process.env.RESEND_AUDIENCE_ID;
+  // Auto-fetch audience ID — no env var needed
+  const audienceId = process.env.RESEND_AUDIENCE_ID || await getAudienceId();
   if (!audienceId) {
-    return NextResponse.json({ error: "Server misconfigured" }, { status: 500 });
+    return NextResponse.json({ error: "No audience found" }, { status: 500 });
   }
 
   const { error } = await resend.contacts.create({
@@ -27,7 +33,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Failed to join waitlist" }, { status: 500 });
   }
 
-  // Send a quick confirmation email to the user
+  // Send confirmation email
   await resend.emails.send({
     from: "InfraReady <hello@infraready.io>",
     to: email,
