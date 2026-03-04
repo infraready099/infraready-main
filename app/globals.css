@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base reset ─────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #04091a;
+  color: #f0f9ff;
+  overflow-x: hidden;
+}
+
+/* ─── Dot grid pattern ───────────────────────────────────────────────────── */
+.dot-grid {
+  background-image: radial-gradient(
+    rgba(148, 163, 184, 0.08) 1px,
+    transparent 1px
+  );
+  background-size: 32px 32px;
+}
+
+/* ─── Gradient text ──────────────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #38bdf8 0%, #67e8f9 40%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-subtle {
+  background: linear-gradient(135deg, #7dd3fc 0%, #a5f3fc 60%, #c4b5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Glow effects ───────────────────────────────────────────────────────── */
+.glow-sky {
+  box-shadow: 0 0 40px rgba(14, 165, 233, 0.15);
+}
+
+.glow-sky-sm {
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.12);
+}
+
+.hero-glow {
+  background: radial-gradient(
+    ellipse 80% 50% at 50% 0%,
+    rgba(14, 165, 233, 0.08) 0%,
+    transparent 70%
+  );
+}
+
+/* ─── Glass card ─────────────────────────────────────────────────────────── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-card-hover {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.glass-card-hover:hover {
+  border-color: rgba(14, 165, 233, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(14, 165, 233, 0.15);
+  background: rgba(14, 165, 233, 0.04);
+}
+
+/* ─── Gradient border (Pro card) ─────────────────────────────────────────── */
+.gradient-border {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(135deg, #0ea5e9, #a78bfa);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ─── Terminal ───────────────────────────────────────────────────────────── */
+.terminal-window {
+  background: #020c1b;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  font-family: var(--font-geist-mono, "Menlo", "Courier New", monospace);
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+
+.terminal-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* ─── Sky gradient button ────────────────────────────────────────────────── */
+.btn-sky {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-sky:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.35);
+}
+
+.btn-sky:active {
+  transform: translateY(0);
+}
+
+/* ─── Ghost button ───────────────────────────────────────────────────────── */
+.btn-ghost {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-ghost:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
+}
+
+/* ─── Checklist ──────────────────────────────────────────────────────────── */
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* ─── Step connector line ────────────────────────────────────────────────── */
+.step-connector {
+  flex: 1;
+  height: 1px;
+  border-top: 1px dashed rgba(14, 165, 233, 0.25);
+  margin-top: 28px;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.5);
+}
+
+/* ─── Selection ──────────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(14, 165, 233, 0.25);
+  color: #f0f9ff;
+}
+
+/* ─── Logo opacity hover ─────────────────────────────────────────────────── */
+.logo-item {
+  transition: opacity 0.2s ease;
+}
+.logo-item:hover {
+  opacity: 1 !important;
+}
