@@ -46,6 +46,10 @@ const config: Config = {
           "0%, 100%": { boxShadow: "0 0 20px rgba(14,165,233,0.15)" },
           "50%": { boxShadow: "0 0 40px rgba(14,165,233,0.35)" },
         },
+        twinkle: {
+          "0%, 100%": { opacity: "0.1", transform: "scale(1)" },
+          "50%": { opacity: "0.7", transform: "scale(1.2)" },
+        },
       },
       animation: {
         float: "float 4s ease-in-out infinite",
@@ -53,6 +57,7 @@ const config: Config = {
         "fade-up": "fade-up 0.6s ease-out forwards",
         shimmer: "shimmer 3s linear infinite",
         "glow-pulse": "glow-pulse 3s ease-in-out infinite",
+        twinkle: "twinkle 4s ease-in-out infinite",
       },
       boxShadow: {
         "glow-sky": "0 0 40px rgba(14, 165, 233, 0.15)",

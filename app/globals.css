@@ -235,6 +235,88 @@ body {
   }
 }
 
+/* ─── Starfield twinkle ───────────────────────────────────────────────────── */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.2); }
+}
+
+/* ─── Aurora beam ────────────────────────────────────────────────────────── */
+.hero-aurora {
+  position: absolute;
+  top: 35%;
+  left: -10%;
+  right: -10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(14,165,233,0.15) 20%, rgba(103,232,249,0.25) 50%, rgba(167,139,250,0.15) 80%, transparent 100%);
+  filter: blur(1px);
+}
+
+.hero-aurora-glow {
+  position: absolute;
+  top: calc(35% - 20px);
+  left: 10%;
+  right: 10%;
+  height: 40px;
+  background: radial-gradient(ellipse 100% 100% at 50% 50%, rgba(14,165,233,0.04) 0%, transparent 70%);
+}
+
+/* ─── Bento grid ─────────────────────────────────────────────────────────── */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 1.25rem;
+}
+
+.bento-wide {
+  grid-column: span 2;
+}
+
+@media (max-width: 1023px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  .bento-wide {
+    grid-column: span 1;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bento-wide {
+    grid-column: span 2;
+  }
+}
+
+/* ─── Animated gradient border (CTA section) ─────────────────────────────── */
+@keyframes border-rotate {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-gradient-border {
+  position: relative;
+}
+
+.animated-gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(14,165,233,0.4), rgba(167,139,250,0.4), rgba(34,211,238,0.4), rgba(14,165,233,0.4));
+  background-size: 300% 300%;
+  animation: border-rotate 6s ease infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
 /* ─── Button glow ring on hover (Vercel-inspired) ────────────────────────── */
 .btn-sky:hover {
   box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15), 0 4px 20px rgba(14, 165, 233, 0.35);

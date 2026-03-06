@@ -17,6 +17,7 @@ const features = [
     description:
       "Infrastructure deploys directly into YOUR AWS account. You own every resource. No vendor lock-in, no data leaving your cloud. Pull the plug anytime.",
     accent: "sky",
+    wide: true,
   },
   {
     icon: ShieldCheck,
@@ -24,6 +25,7 @@ const features = [
     description:
       "Least-privilege IAM roles, encryption at rest via KMS, CloudTrail audit logging, GuardDuty threat detection, and Config compliance rules — all enabled by default.",
     accent: "violet",
+    wide: false,
   },
   {
     icon: Code2,
@@ -31,6 +33,7 @@ const features = [
     description:
       "Built on OpenTofu — the open-source Terraform fork with a clean MPL license. No BSL risk. Full state visibility in your own S3 bucket. Standard HCL you can read.",
     accent: "cyan",
+    wide: false,
   },
   {
     icon: Layers,
@@ -38,6 +41,7 @@ const features = [
     description:
       "One click deploys your entire production stack: isolated VPC with private subnets, RDS PostgreSQL Multi-AZ, ECS Fargate, S3 storage, and CloudFront CDN.",
     accent: "sky",
+    wide: true,
   },
   {
     icon: Activity,
@@ -45,6 +49,7 @@ const features = [
     description:
       "Watch every AWS resource being created live. No black box. You see exactly what InfraReady is doing — and you can replay or cancel at any time.",
     accent: "emerald",
+    wide: false,
   },
   {
     icon: CreditCard,
@@ -52,34 +57,40 @@ const features = [
     description:
       "Have $10k–$100k in AWS Activate credits you can't use? InfraReady helps you activate and apply them. We're the fastest way to burn credits on real infrastructure.",
     accent: "orange",
+    wide: false,
   },
 ];
 
-const accentMap: Record<string, { icon: string; border: string; glow: string }> = {
+const accentMap: Record<string, { icon: string; border: string; glow: string; label: string }> = {
   sky: {
     icon: "text-sky-400",
     border: "rgba(14,165,233,0.2)",
     glow: "rgba(14,165,233,0.08)",
+    label: "text-sky-400/60",
   },
   violet: {
     icon: "text-violet-400",
     border: "rgba(167,139,250,0.2)",
     glow: "rgba(167,139,250,0.08)",
+    label: "text-violet-400/60",
   },
   cyan: {
     icon: "text-cyan-400",
     border: "rgba(34,211,238,0.2)",
     glow: "rgba(34,211,238,0.08)",
+    label: "text-cyan-400/60",
   },
   emerald: {
     icon: "text-emerald-400",
     border: "rgba(52,211,153,0.2)",
     glow: "rgba(52,211,153,0.08)",
+    label: "text-emerald-400/60",
   },
   orange: {
     icon: "text-orange-400",
     border: "rgba(251,146,60,0.2)",
     glow: "rgba(251,146,60,0.08)",
+    label: "text-orange-400/60",
   },
 };
 
@@ -130,9 +141,9 @@ export default function Features() {
           </p>
         </motion.div>
 
-        {/* Feature grid */}
+        {/* Bento feature grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+          className="bento-grid"
           variants={container}
           initial="hidden"
           whileInView="show"
@@ -142,12 +153,57 @@ export default function Features() {
             const Icon = feature.icon;
             const accent = accentMap[feature.accent] ?? accentMap.sky;
 
+            if (feature.wide) {
+              // Wide bento card — horizontal layout
+              return (
+                <motion.div
+                  key={feature.title}
+                  variants={item}
+                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                  className="bento-wide group relative glass-card rounded-2xl p-6 glass-card-hover cursor-default flex flex-col sm:flex-row items-start gap-6 will-change-transform"
+                >
+                  {/* Icon — left aligned on wide cards */}
+                  <div
+                    className="w-14 h-14 rounded-xl flex-shrink-0 flex items-center justify-center transition-all duration-300"
+                    style={{
+                      background: accent.glow,
+                      border: `1px solid ${accent.border}`,
+                    }}
+                  >
+                    <Icon
+                      className={`w-6 h-6 ${accent.icon}`}
+                      strokeWidth={1.75}
+                    />
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg font-bold text-ir-text mb-2.5 tracking-tight">
+                      {feature.title}
+                    </h3>
+                    <p className="text-sm text-ir-secondary leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </div>
+
+                  {/* Hover glow spot */}
+                  <div
+                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{
+                      background: `radial-gradient(circle at 15% 50%, ${accent.glow} 0%, transparent 50%)`,
+                    }}
+                  />
+                </motion.div>
+              );
+            }
+
+            // Normal bento card — vertical layout
             return (
               <motion.div
                 key={feature.title}
                 variants={item}
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="group relative glass-card rounded-2xl p-6 glass-card-hover cursor-default"
+                className="group relative glass-card rounded-2xl p-6 glass-card-hover cursor-default will-change-transform"
               >
                 {/* Icon */}
                 <div

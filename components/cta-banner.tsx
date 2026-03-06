@@ -1,8 +1,14 @@
 "use client";
 
-import { ArrowRight, CheckCircle, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle, Sparkles, ShieldCheck, Lock, Zap } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
+
+const trustBadges = [
+  { icon: ShieldCheck, label: "SOC2-ready infrastructure" },
+  { icon: Lock, label: "Zero credentials stored" },
+  { icon: Zap, label: "Live in 20 minutes" },
+];
 
 export default function CtaBanner() {
   const [email, setEmail] = useState("");
@@ -86,81 +92,81 @@ export default function CtaBanner() {
           </span>
         </motion.p>
 
-        {/* Form */}
+        {/* Animated gradient border wrapper around form area */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: "easeOut", delay: 0.3 }}
           viewport={{ once: true, margin: "-80px" }}
         >
-          {status === "success" ? (
-            <div className="mt-10 flex items-center justify-center gap-3 text-emerald-400">
-              <CheckCircle size={20} />
-              <span className="text-base font-medium">
-                You&apos;re on the list — check your email!
-              </span>
-            </div>
-          ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="mt-10 flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+          <div className="mt-10 animated-gradient-border rounded-2xl p-px">
+            <div
+              className="rounded-2xl px-6 py-8"
+              style={{ background: "rgba(4,9,26,0.95)" }}
             >
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@startup.io"
-                required
-                disabled={status === "loading"}
-                className="flex-1 px-5 py-3.5 rounded-xl text-sm text-ir-text placeholder-ir-muted outline-none transition-all duration-200 focus:border-sky-500/50 disabled:opacity-50"
-                style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                }}
-              />
-              <button
-                type="submit"
-                disabled={status === "loading"}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-white btn-sky flex-shrink-0 disabled:opacity-60"
-              >
-                {status === "loading" ? "Joining..." : "Get early access"}
-                {status !== "loading" && <ArrowRight size={15} />}
-              </button>
-            </form>
-          )}
+              {status === "success" ? (
+                <div className="flex items-center justify-center gap-3 text-emerald-400">
+                  <CheckCircle size={20} />
+                  <span className="text-base font-medium">
+                    You&apos;re on the list — check your email!
+                  </span>
+                </div>
+              ) : (
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+                >
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@startup.io"
+                    required
+                    disabled={status === "loading"}
+                    className="flex-1 px-5 py-3.5 rounded-xl text-sm text-ir-text placeholder-ir-muted outline-none transition-all duration-200 focus:border-sky-500/50 disabled:opacity-50"
+                    style={{
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1px solid rgba(255,255,255,0.1)",
+                    }}
+                  />
+                  <button
+                    type="submit"
+                    disabled={status === "loading"}
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-white btn-sky flex-shrink-0 disabled:opacity-60"
+                  >
+                    {status === "loading" ? "Joining..." : "Get early access"}
+                    {status !== "loading" && <ArrowRight size={15} />}
+                  </button>
+                </form>
+              )}
 
-          {status === "error" && (
-            <p className="mt-3 text-sm text-red-400">Something went wrong. Try again.</p>
-          )}
-        </motion.div>
+              {status === "error" && (
+                <p className="mt-3 text-sm text-red-400 text-center">Something went wrong. Try again.</p>
+              )}
 
-        <motion.p
-          className="mt-4 text-xs text-ir-muted"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.45, delay: 0.4 }}
-          viewport={{ once: true, margin: "-80px" }}
-        >
-          No credit card required. Cancel anytime. Your AWS account, always.
-        </motion.p>
+              <p className="mt-4 text-xs text-ir-muted text-center">
+                No credit card required. Cancel anytime. Your AWS account, always.
+              </p>
 
-        <motion.div
-          className="mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-10"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: "easeOut", delay: 0.45 }}
-          viewport={{ once: true, margin: "-80px" }}
-        >
-          {[
-            { icon: "🔒", label: "We never touch your AWS credentials" },
-            { icon: "📦", label: "Your infra, your S3 state bucket" },
-            { icon: "🚀", label: "Production-ready in 20 minutes" },
-          ].map((item) => (
-            <div key={item.label} className="flex items-center gap-2.5">
-              <span className="text-base">{item.icon}</span>
-              <span className="text-xs text-ir-muted font-medium">{item.label}</span>
+              {/* Trust badges */}
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                {trustBadges.map((badge) => {
+                  const Icon = badge.icon;
+                  return (
+                    <div
+                      key={badge.label}
+                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-card border border-white/[0.07]"
+                    >
+                      <Icon size={12} className="text-sky-400 flex-shrink-0" />
+                      <span className="text-xs font-medium text-ir-secondary whitespace-nowrap">
+                        {badge.label}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          ))}
+          </div>
         </motion.div>
       </div>
     </section>
