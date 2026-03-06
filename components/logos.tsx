@@ -54,10 +54,10 @@ const marqueeLogos = [...logos, ...logos];
 
 export default function Logos() {
   return (
-    <section className="py-14 border-y border-white/5" style={{ background: "rgba(255,255,255,0.015)" }}>
+    <section className="py-12 border-y border-white/[0.06]" style={{ background: "rgba(255,255,255,0.012)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-center text-sm font-medium text-ir-muted tracking-widest uppercase mb-10">
-          Works with the tools you already use
+        <p className="text-center text-xs font-semibold text-ir-muted tracking-widest uppercase mb-10">
+          Built on the stack you already trust
         </p>
       </div>
 

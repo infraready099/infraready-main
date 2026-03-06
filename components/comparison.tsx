@@ -256,7 +256,7 @@ export default function Comparison() {
           transition={{ duration: 0.4, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          Pricing estimates as of 2025. Porter entry pricing at $499/mo for managed k8s.
+          Pricing estimates as of 2026. Porter entry pricing at $499/mo for managed k8s.
           Railway charges per resource above free tier.
         </motion.p>
       </div>

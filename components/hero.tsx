@@ -119,7 +119,7 @@ export default function Hero() {
     <section
       id="hero"
       className="relative overflow-hidden hero-mesh"
-      style={{ minHeight: "calc(100vh - 64px)" }}
+      style={{ minHeight: "100vh" }}
     >
       {/* Stars */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
@@ -168,7 +168,7 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-28">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 lg:pt-32 lg:pb-28">
         {/* ── Two-column layout on large screens ─────────────── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 

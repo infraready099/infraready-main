@@ -33,24 +33,29 @@ export default function CtaBanner() {
 
   return (
     <section id="waitlist" className="py-24 lg:py-32 relative overflow-hidden">
-      {/* Background */}
+      {/* Multi-layer background — much more dramatic */}
       <div
         className="absolute inset-0"
         style={{
-          background:
-            "linear-gradient(135deg, rgba(14,165,233,0.06) 0%, rgba(4,9,26,0) 40%, rgba(167,139,250,0.06) 100%)",
+          background: "linear-gradient(180deg, #04091a 0%, #06102a 50%, #04091a 100%)",
         }}
       />
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background:
-            "radial-gradient(ellipse 60% 60% at 50% 50%, rgba(14,165,233,0.06) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(14,165,233,0.07) 0%, rgba(245,158,11,0.03) 50%, transparent 70%)",
         }}
       />
-
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-sky-500/20 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/20 to-transparent" />
+      {/* Grid lines in CTA too */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-30"
+        style={{
+          backgroundImage: "linear-gradient(rgba(148,163,184,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,0.04) 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
+        }}
+      />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-sky-500/20 to-transparent" />
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div

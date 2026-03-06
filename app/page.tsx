@@ -13,6 +13,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <Nav />
+      {/* Spacer so fixed nav doesn't overlap scroll-to-top content */}
       <Hero />
       <Logos />
       <HowItWorks />
