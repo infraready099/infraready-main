@@ -129,7 +129,7 @@ function ActivateVisual() {
 const cards = [
   {
     icon: Lock,
-    accent: { icon: "text-sky-400", border: "rgba(14,165,233,0.25)", bg: "rgba(14,165,233,0.08)" },
+    accent: { icon: "text-cyan-400", border: "rgba(14,165,233,0.25)", bg: "rgba(14,165,233,0.08)" },
     title: "Your AWS, your rules",
     description:
       "Infrastructure deploys directly into YOUR AWS account. You own every resource. No vendor lock-in, no data leaving your cloud.",
@@ -165,7 +165,7 @@ const cards = [
   },
   {
     icon: Activity,
-    accent: { icon: "text-sky-400", border: "rgba(14,165,233,0.25)", bg: "rgba(14,165,233,0.08)" },
+    accent: { icon: "text-cyan-400", border: "rgba(14,165,233,0.25)", bg: "rgba(14,165,233,0.08)" },
     title: "Real-time deploy logs",
     description:
       "Watch every AWS resource created live. No black box. Cancel or replay anytime.",
@@ -202,7 +202,7 @@ export default function Features() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           viewport={{ once: true, margin: "-80px" }}
         >
-          <p className="text-xs font-semibold text-sky-400 tracking-widest uppercase mb-3">
+          <p className="text-xs font-semibold text-cyan-400 tracking-widest uppercase mb-3">
             Features
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ir-text tracking-tight">

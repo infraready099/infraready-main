@@ -10,7 +10,7 @@ const steps = [
     description:
       "Sign in with GitHub OAuth. InfraReady reads your repo and auto-detects your stack — Next.js, Node, Python, or any containerized app. No config files. No YAML.",
     detail: "OAuth · Repo detection · Framework auto-config",
-    accent: { color: "rgba(14,165,233,0.2)", text: "text-sky-400", border: "rgba(14,165,233,0.3)" },
+    accent: { color: "rgba(14,165,233,0.2)", text: "text-cyan-400", border: "rgba(14,165,233,0.3)" },
     visual: (
       <div className="mt-5 rounded-xl border border-white/[0.07] bg-black/30 p-4">
         <div className="flex items-center gap-3 mb-4 pb-3 border-b border-white/[0.06]">
@@ -27,7 +27,7 @@ const steps = [
         </div>
         <div className="space-y-2">
           {[
-            { label: "Framework", value: "Next.js 15", color: "text-sky-400" },
+            { label: "Framework", value: "Next.js 15", color: "text-cyan-400" },
             { label: "Runtime", value: "Node 22 LTS", color: "text-emerald-400" },
             { label: "Dockerfile", value: "Auto-generated", color: "text-violet-400" },
           ].map((row) => (
@@ -89,11 +89,11 @@ const steps = [
             { module: "aws_cloudfront_distribution", status: "deploying...", done: false },
           ].map((row) => (
             <div key={row.module} className="flex items-center gap-2 text-[10px] font-mono">
-              <span className={row.done ? "text-emerald-400" : "text-sky-400 animate-pulse"}>
+              <span className={row.done ? "text-emerald-400" : "text-cyan-400 animate-pulse"}>
                 {row.done ? "✓" : "→"}
               </span>
               <span className="text-slate-400 flex-1 truncate">{row.module}</span>
-              <span className={row.done ? "text-emerald-400/70" : "text-sky-400/70"}>{row.status}</span>
+              <span className={row.done ? "text-emerald-400/70" : "text-cyan-400/70"}>{row.status}</span>
             </div>
           ))}
         </div>
@@ -148,7 +148,7 @@ export default function HowItWorks() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           viewport={{ once: true, margin: "-80px" }}
         >
-          <p className="text-xs font-semibold text-sky-400 tracking-widest uppercase mb-3">
+          <p className="text-xs font-semibold text-cyan-400 tracking-widest uppercase mb-3">
             How it works
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ir-text tracking-tight max-w-xl">
@@ -228,7 +228,7 @@ export default function HowItWorks() {
         >
           {[
             { value: "~20 min", label: "Average deploy time", color: "text-amber-400" },
-            { value: "11", label: "OpenTofu modules", color: "text-sky-400" },
+            { value: "11", label: "OpenTofu modules", color: "text-cyan-400" },
             { value: "0", label: "AWS credentials stored", color: "text-emerald-400" },
           ].map((stat, i) => (
             <div

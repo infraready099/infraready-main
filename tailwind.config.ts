@@ -11,7 +11,9 @@ const config: Config = {
       colors: {
         "ir-navy": "#04091A",
         "ir-surface": "rgba(255,255,255,0.03)",
-        "ir-brand": "#0EA5E9",
+        "ir-brand": "#7C3AED",      /* violet — primary CTA */
+        "ir-cyan": "#22D3EE",       /* cyan — technical accent */
+        "ir-amber": "#F59E0B",      /* amber — warm/AWS accent */
         "ir-text": "#F0F9FF",
         "ir-muted": "#64748B",
         "ir-secondary": "#94A3B8",

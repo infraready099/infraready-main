@@ -100,7 +100,7 @@ export default function Pricing() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           viewport={{ once: true, margin: "-80px" }}
         >
-          <p className="text-sm font-semibold text-sky-400 tracking-widest uppercase mb-3">
+          <p className="text-sm font-semibold text-cyan-400 tracking-widest uppercase mb-3">
             Pricing
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ir-text tracking-tight">
@@ -187,7 +187,7 @@ export default function Pricing() {
                           <li key={feature} className="flex items-start gap-3">
                             <Check
                               size={15}
-                              className="text-sky-400 flex-shrink-0 mt-0.5"
+                              className="text-cyan-400 flex-shrink-0 mt-0.5"
                               strokeWidth={2.5}
                             />
                             <span className="text-sm text-ir-secondary">

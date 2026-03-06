@@ -39,7 +39,7 @@ export default function Footer() {
           {/* Brand column */}
           <div className="col-span-2 md:col-span-1">
             <a href="/" className="flex items-center gap-2.5 mb-4 group">
-              <div className="w-8 h-8 rounded-lg bg-sky-500 flex items-center justify-center transition-all duration-300 group-hover:bg-sky-400">
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300" style={{ background: "linear-gradient(135deg, #7c3aed, #5b21b6)", boxShadow: "0 0 12px rgba(124,58,237,0.3)" }}>
                 <Zap size={16} className="text-white" fill="white" />
               </div>
               <span className="text-base font-bold text-ir-text tracking-tight">

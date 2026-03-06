@@ -24,50 +24,55 @@ body {
 /* ─── Dot grid pattern ───────────────────────────────────────────────────── */
 .dot-grid {
   background-image: radial-gradient(
-    rgba(148, 163, 184, 0.08) 1px,
+    rgba(148, 163, 184, 0.07) 1px,
     transparent 1px
   );
   background-size: 32px 32px;
 }
 
-/* ─── Gradient text ──────────────────────────────────────────────────────── */
+/* ─── PALETTE ────────────────────────────────────────────────────────────── */
+/*   Amber  #F59E0B  →  Cyan  #06B6D4  →  Violet  #7C3AED                   */
+/*   This tri-color system is warm-to-cool, AWS-inspired + cloud-native       */
+
+/* ─── Gradient text (amber → cyan → violet) ─────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #f59e0b 0%, #38bdf8 55%, #818cf8 100%);
+  background: linear-gradient(135deg, #fbbf24 0%, #22d3ee 50%, #a78bfa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-subtle {
-  background: linear-gradient(135deg, #fbbf24 0%, #7dd3fc 55%, #a5b4fc 100%);
+  background: linear-gradient(135deg, #fcd34d 0%, #67e8f9 55%, #c4b5fd 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Alternate gradient — cooler, for secondary use */
+/* Cyan-to-violet for secondary use */
 .gradient-text-cool {
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+  background: linear-gradient(135deg, #22d3ee 0%, #7c3aed 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 /* ─── Glow effects ───────────────────────────────────────────────────────── */
+.glow-brand {
+  box-shadow: 0 0 40px rgba(124, 58, 237, 0.2);
+}
+
+.glow-brand-sm {
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.15);
+}
+
+/* Keep sky names for backward compat (terminal uses these) */
 .glow-sky {
-  box-shadow: 0 0 40px rgba(14, 165, 233, 0.15);
+  box-shadow: 0 0 40px rgba(6, 182, 212, 0.15);
 }
 
 .glow-sky-sm {
-  box-shadow: 0 0 20px rgba(14, 165, 233, 0.12);
-}
-
-.hero-glow {
-  background: radial-gradient(
-    ellipse 80% 50% at 50% 0%,
-    rgba(14, 165, 233, 0.08) 0%,
-    transparent 70%
-  );
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.12);
 }
 
 /* ─── Glass card ─────────────────────────────────────────────────────────── */
@@ -79,14 +84,13 @@ body {
 }
 
 .glass-card-hover {
-  transition: border-color 0.25s ease, box-shadow 0.25s ease,
-    background 0.25s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
 .glass-card-hover:hover {
-  border-color: rgba(14, 165, 233, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(14, 165, 233, 0.15);
-  background: rgba(14, 165, 233, 0.04);
+  border-color: rgba(34, 211, 238, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(34, 211, 238, 0.12);
+  background: rgba(34, 211, 238, 0.03);
 }
 
 /* ─── Gradient border (Pro card) ─────────────────────────────────────────── */
@@ -102,7 +106,7 @@ body {
   inset: 0;
   border-radius: 16px;
   padding: 1px;
-  background: linear-gradient(135deg, #0ea5e9, #a78bfa);
+  background: linear-gradient(135deg, #f59e0b, #22d3ee, #7c3aed);
   -webkit-mask: linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -134,16 +138,16 @@ body {
   border-radius: 50%;
 }
 
-/* ─── Sky gradient button ────────────────────────────────────────────────── */
+/* ─── Primary CTA button (violet → deep violet) ─────────────────────────── */
 .btn-sky {
-  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
   transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-sky:hover {
   opacity: 0.92;
   transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.35);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2), 0 4px 24px rgba(124, 58, 237, 0.4);
 }
 
 .btn-sky:active {
@@ -169,14 +173,6 @@ body {
   gap: 10px;
 }
 
-/* ─── Step connector line ────────────────────────────────────────────────── */
-.step-connector {
-  flex: 1;
-  height: 1px;
-  border-top: 1px dashed rgba(14, 165, 233, 0.25);
-  margin-top: 28px;
-}
-
 /* ─── Scrollbar ──────────────────────────────────────────────────────────── */
 ::-webkit-scrollbar {
   width: 6px;
@@ -194,7 +190,7 @@ body {
 
 /* ─── Selection ──────────────────────────────────────────────────────────── */
 ::selection {
-  background: rgba(14, 165, 233, 0.25);
+  background: rgba(124, 58, 237, 0.3);
   color: #f0f9ff;
 }
 
@@ -233,40 +229,45 @@ body {
 }
 
 @keyframes terminal-line-in {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ─── Starfield twinkle ───────────────────────────────────────────────────── */
+/* ─── Starfield twinkle ──────────────────────────────────────────────────── */
 @keyframes twinkle {
-  0%, 100% { opacity: 0.1; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.2); }
+  0%, 100% { opacity: 0.08; transform: scale(1); }
+  50%       { opacity: 0.6;  transform: scale(1.3); }
 }
 
-/* ─── Aurora beam ────────────────────────────────────────────────────────── */
+/* ─── Aurora beam (amber → cyan → violet palette) ───────────────────────── */
 .hero-aurora {
   position: absolute;
   top: 35%;
   left: -10%;
   right: -10%;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(14,165,233,0.15) 20%, rgba(103,232,249,0.25) 50%, rgba(167,139,250,0.15) 80%, transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(245,158,11,0.2) 15%,
+    rgba(34,211,238,0.3) 50%,
+    rgba(124,58,237,0.2) 85%,
+    transparent 100%
+  );
   filter: blur(1px);
 }
 
 .hero-aurora-glow {
   position: absolute;
-  top: calc(35% - 20px);
+  top: calc(35% - 30px);
   left: 10%;
   right: 10%;
-  height: 40px;
-  background: radial-gradient(ellipse 100% 100% at 50% 50%, rgba(14,165,233,0.04) 0%, transparent 70%);
+  height: 60px;
+  background: radial-gradient(
+    ellipse 100% 100% at 50% 50%,
+    rgba(34,211,238,0.04) 0%,
+    transparent 70%
+  );
 }
 
 /* ─── Bento grid ─────────────────────────────────────────────────────────── */
@@ -299,7 +300,7 @@ body {
   }
 }
 
-/* ─── Animated gradient border (CTA section) ─────────────────────────────── */
+/* ─── Animated gradient border ───────────────────────────────────────────── */
 @keyframes border-rotate {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
@@ -316,21 +317,48 @@ body {
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(14,165,233,0.4), rgba(167,139,250,0.4), rgba(34,211,238,0.4), rgba(14,165,233,0.4));
+  background: linear-gradient(
+    135deg,
+    rgba(245,158,11,0.5),
+    rgba(34,211,238,0.5),
+    rgba(124,58,237,0.5),
+    rgba(245,158,11,0.5)
+  );
   background-size: 300% 300%;
-  animation: border-rotate 6s ease infinite;
+  animation: border-rotate 5s ease infinite;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
 }
 
-/* ─── Button glow ring on hover (Vercel-inspired) ────────────────────────── */
-.btn-sky:hover {
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15), 0 4px 20px rgba(14, 165, 233, 0.35);
+/* ─── Hero mesh background ───────────────────────────────────────────────── */
+.hero-mesh {
+  background-color: #04091a;
 }
 
-/* ─── Subtle noise texture overlay (Linear-inspired) ────────────────────── */
+/* ─── Hero grid lines ─────────────────────────────────────────────────────── */
+.hero-grid-lines {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 80%);
+}
+
+/* ─── Section dividers ────────────────────────────────────────────────────── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 30%, rgba(255,255,255,0.06) 70%, transparent 100%);
+}
+
+/* ─── Floating nav clearance ──────────────────────────────────────────────── */
+[id] {
+  scroll-margin-top: 96px;
+}
+
+/* ─── Noise texture overlay ──────────────────────────────────────────────── */
 .noise-overlay {
   position: relative;
 }
@@ -343,39 +371,4 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 128px 128px;
-}
-
-/* ─── Hero mesh background ───────────────────────────────────────────────── */
-.hero-mesh {
-  background-color: #04091a;
-}
-
-/* ─── Hero grid lines (Vercel/Linear inspired) ───────────────────────────── */
-.hero-grid-lines {
-  background-image:
-    linear-gradient(rgba(148, 163, 184, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.035) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 80%);
-}
-
-/* ─── Section divider line ────────────────────────────────────────────────── */
-.section-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 30%, rgba(255,255,255,0.06) 70%, transparent 100%);
-}
-
-/* ─── Subtle top highlight line on sections ──────────────────────────────── */
-.section-top-line::before {
-  content: "";
-  display: block;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(14,165,233,0.15) 50%, transparent 100%);
-  margin-bottom: 0;
-}
-
-/* ─── Floating nav clearance (used on anchored sections) ─────────────────── */
-[id] {
-  scroll-margin-top: 96px;
 }

@@ -94,8 +94,8 @@ function AnimatedTerminal() {
               className={
                 line.prefix === "$" ? "text-slate-500 flex-shrink-0 w-3"
                 : line.prefix === "✓" ? "text-emerald-400 flex-shrink-0 w-3"
-                : line.prefix === "★" ? "text-yellow-400 flex-shrink-0 w-3"
-                : "text-sky-400 flex-shrink-0 w-3"
+                : line.prefix === "★" ? "text-amber-400 flex-shrink-0 w-3"
+                : "text-cyan-400 flex-shrink-0 w-3"
               }
             >
               {line.prefix}
@@ -150,7 +150,7 @@ export default function Hero() {
           transform: "translateX(-50%)",
           width: "900px",
           height: "600px",
-          background: "radial-gradient(ellipse at center, rgba(14,165,233,0.10) 0%, rgba(167,139,250,0.05) 40%, transparent 70%)",
+          background: "radial-gradient(ellipse at center, rgba(124,58,237,0.12) 0%, rgba(34,211,238,0.06) 40%, transparent 70%)",
           filter: "blur(40px)",
         }}
         aria-hidden="true"
@@ -162,7 +162,7 @@ export default function Hero() {
           right: "-5%",
           width: "500px",
           height: "500px",
-          background: "radial-gradient(ellipse at center, rgba(167,139,250,0.07) 0%, transparent 60%)",
+          background: "radial-gradient(ellipse at center, rgba(245,158,11,0.06) 0%, transparent 60%)",
           filter: "blur(60px)",
         }}
         aria-hidden="true"
@@ -292,7 +292,7 @@ export default function Hero() {
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
-                background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(14,165,233,0.12) 0%, transparent 70%)",
+                background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(124,58,237,0.14) 0%, rgba(34,211,238,0.06) 60%, transparent 80%)",
                 filter: "blur(20px)",
                 transform: "scale(1.1)",
               }}
@@ -312,8 +312,8 @@ export default function Hero() {
                 <span className="ml-3 text-[10px] text-slate-500 font-medium flex-1">
                   infraready — production deploy
                 </span>
-                <span className="flex items-center gap-1.5 text-[10px] text-emerald-400 font-medium">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="flex items-center gap-1.5 text-[10px] text-cyan-400 font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                   live
                 </span>
               </div>
@@ -328,7 +328,7 @@ export default function Hero() {
               className="absolute -right-4 top-8 glass-card border border-white/10 rounded-xl px-3 py-2 hidden xl:block"
               style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.4)" }}
             >
-              <p className="text-xs font-bold text-emerald-400">~20 min</p>
+              <p className="text-xs font-bold text-amber-400">~20 min</p>
               <p className="text-[10px] text-ir-muted">avg deploy</p>
             </motion.div>
 
@@ -339,7 +339,7 @@ export default function Hero() {
               className="absolute -left-4 bottom-10 glass-card border border-white/10 rounded-xl px-3 py-2 hidden xl:block"
               style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.4)" }}
             >
-              <p className="text-xs font-bold text-sky-400">0 creds stored</p>
+              <p className="text-xs font-bold text-violet-400">0 creds stored</p>
               <p className="text-[10px] text-ir-muted">SOC2-ready</p>
             </motion.div>
           </motion.div>
@@ -353,10 +353,10 @@ export default function Hero() {
           className="mt-16 lg:mt-20 flex flex-wrap items-center justify-center gap-x-8 gap-y-3"
         >
           {[
-            { label: "11 OpenTofu modules", dot: "bg-sky-400" },
+            { label: "11 OpenTofu modules", dot: "bg-cyan-400" },
             { label: "Your AWS account", dot: "bg-emerald-400" },
             { label: "No vendor lock-in", dot: "bg-violet-400" },
-            { label: "SOC2 baseline included", dot: "bg-orange-400" },
+            { label: "SOC2 baseline included", dot: "bg-amber-400" },
           ].map((item) => (
             <div key={item.label} className="flex items-center gap-2 text-xs text-ir-muted">
               <span className={`w-1.5 h-1.5 rounded-full ${item.dot}`} />

@@ -65,8 +65,8 @@ export default function CtaBanner() {
           viewport={{ once: true, margin: "-80px" }}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-sky-500/20 mb-8"
         >
-          <Sparkles size={13} className="text-sky-400" />
-          <span className="text-sm font-medium text-sky-400">
+          <Sparkles size={13} className="text-cyan-400" />
+          <span className="text-sm font-medium text-cyan-400">
             Limited availability · Private beta
           </span>
         </motion.div>
@@ -162,7 +162,7 @@ export default function CtaBanner() {
                       key={badge.label}
                       className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-card border border-white/[0.07]"
                     >
-                      <Icon size={12} className="text-sky-400 flex-shrink-0" />
+                      <Icon size={12} className="text-cyan-400 flex-shrink-0" />
                       <span className="text-xs font-medium text-ir-secondary whitespace-nowrap">
                         {badge.label}
                       </span>

@@ -109,7 +109,7 @@ export default function Comparison() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           viewport={{ once: true, margin: "-80px" }}
         >
-          <p className="text-sm font-semibold text-sky-400 tracking-widest uppercase mb-3">
+          <p className="text-sm font-semibold text-cyan-400 tracking-widest uppercase mb-3">
             Why InfraReady?
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ir-text tracking-tight">
@@ -141,14 +141,14 @@ export default function Comparison() {
                 {/* InfraReady — highlighted column */}
                 <th className="py-5 px-4 text-center"
                   style={{
-                    background: "rgba(14,165,233,0.06)",
-                    borderLeft: "1px solid rgba(14,165,233,0.25)",
-                    borderRight: "1px solid rgba(14,165,233,0.25)",
-                    borderBottom: "1px solid rgba(14,165,233,0.25)",
-                    borderTop: "1px solid rgba(14,165,233,0.25)",
+                    background: "rgba(124,58,237,0.07)",
+                    borderLeft: "1px solid rgba(124,58,237,0.3)",
+                    borderRight: "1px solid rgba(124,58,237,0.3)",
+                    borderBottom: "1px solid rgba(124,58,237,0.3)",
+                    borderTop: "1px solid rgba(124,58,237,0.3)",
                   }}>
                   <div className="flex flex-col items-center gap-1">
-                    <span className="text-sm font-bold text-sky-400">InfraReady</span>
+                    <span className="text-sm font-bold text-violet-400">InfraReady</span>
                     <span className="text-[10px] font-semibold text-emerald-400 uppercase tracking-widest bg-emerald-400/10 border border-emerald-400/20 px-2 py-0.5 rounded-full">
                       Recommended
                     </span>
@@ -200,10 +200,10 @@ export default function Comparison() {
                     <td
                       className="py-4 px-4 text-center"
                       style={{
-                        background: "rgba(14,165,233,0.05)",
-                        borderLeft: "1px solid rgba(14,165,233,0.2)",
-                        borderRight: "1px solid rgba(14,165,233,0.2)",
-                        borderBottom: isLast ? "1px solid rgba(14,165,233,0.2)" : "1px solid rgba(14,165,233,0.12)",
+                        background: "rgba(124,58,237,0.05)",
+                        borderLeft: "1px solid rgba(124,58,237,0.2)",
+                        borderRight: "1px solid rgba(124,58,237,0.2)",
+                        borderBottom: isLast ? "1px solid rgba(124,58,237,0.2)" : "1px solid rgba(124,58,237,0.1)",
                       }}
                     >
                       <CellValue value={row.infraready} highlight />

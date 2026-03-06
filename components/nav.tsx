@@ -42,8 +42,8 @@ export default function Nav() {
               <div
                 className="w-7 h-7 rounded-lg flex items-center justify-center transition-all duration-300"
                 style={{
-                  background: "linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%)",
-                  boxShadow: "0 0 12px rgba(14,165,233,0.3)",
+                  background: "linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%)",
+                  boxShadow: "0 0 14px rgba(124,58,237,0.45)",
                 }}
               >
                 <Zap className="w-3.5 h-3.5 text-white" fill="white" />

@@ -81,7 +81,7 @@ export default function Testimonials() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           viewport={{ once: true, margin: "-80px" }}
         >
-          <p className="text-xs font-semibold text-sky-400 tracking-widest uppercase mb-3">
+          <p className="text-xs font-semibold text-cyan-400 tracking-widest uppercase mb-3">
             What founders say
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ir-text tracking-tight">
