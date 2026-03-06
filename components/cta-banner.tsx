@@ -1,8 +1,9 @@
 "use client";
 
-import { ArrowRight, CheckCircle, Sparkles, ShieldCheck, Lock, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle, Sparkles, ShieldCheck, Lock, Zap, ExternalLink } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { APP_LINKS } from "@/lib/config";
 
 const trustBadges = [
   { icon: ShieldCheck, label: "SOC2-ready infrastructure" },
@@ -33,7 +34,7 @@ export default function CtaBanner() {
 
   return (
     <section id="waitlist" className="py-24 lg:py-32 relative overflow-hidden">
-      {/* Multi-layer background — much more dramatic */}
+      {/* Multi-layer background */}
       <div
         className="absolute inset-0"
         style={{
@@ -46,7 +47,6 @@ export default function CtaBanner() {
           background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(14,165,233,0.07) 0%, rgba(245,158,11,0.03) 50%, transparent 70%)",
         }}
       />
-      {/* Grid lines in CTA too */}
       <div
         className="absolute inset-0 pointer-events-none opacity-30"
         style={{
@@ -97,24 +97,66 @@ export default function CtaBanner() {
           </span>
         </motion.p>
 
-        {/* Animated gradient border wrapper around form area */}
+        {/* Primary CTA — go straight to the app */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: "easeOut", delay: 0.3 }}
+          transition={{ duration: 0.45, ease: "easeOut", delay: 0.25 }}
+          viewport={{ once: true, margin: "-80px" }}
+          className="mt-8"
+        >
+          <a
+            href={APP_LINKS.getStarted}
+            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl text-base font-semibold text-white btn-sky cursor-pointer"
+          >
+            Start deploying — it&apos;s free
+            <ArrowRight size={16} />
+          </a>
+          <p className="mt-3 text-xs text-ir-muted">
+            GitHub OAuth · No credit card · Your AWS account, always
+          </p>
+        </motion.div>
+
+        {/* Divider */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.35 }}
+          viewport={{ once: true, margin: "-80px" }}
+          className="mt-10 flex items-center gap-4"
+        >
+          <div className="flex-1 h-px bg-white/[0.06]" />
+          <span className="text-xs text-ir-muted">or join the waitlist for updates</span>
+          <div className="flex-1 h-px bg-white/[0.06]" />
+        </motion.div>
+
+        {/* Waitlist form (for email capture / launch updates) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut", delay: 0.4 }}
           viewport={{ once: true, margin: "-80px" }}
         >
-          <div className="mt-10 animated-gradient-border rounded-2xl p-px">
+          <div className="mt-6 animated-gradient-border rounded-2xl p-px">
             <div
-              className="rounded-2xl px-6 py-8"
+              className="rounded-2xl px-6 py-7"
               style={{ background: "rgba(4,9,26,0.95)" }}
             >
               {status === "success" ? (
-                <div className="flex items-center justify-center gap-3 text-emerald-400">
-                  <CheckCircle size={20} />
-                  <span className="text-base font-medium">
-                    You&apos;re on the list — check your email!
-                  </span>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-center gap-3 text-emerald-400">
+                    <CheckCircle size={20} />
+                    <span className="text-base font-medium">
+                      You&apos;re on the list — we&apos;ll keep you updated!
+                    </span>
+                  </div>
+                  <a
+                    href={APP_LINKS.getStarted}
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-violet-400 hover:text-violet-300 transition-colors"
+                  >
+                    <ExternalLink size={14} />
+                    Start building now — app is live
+                  </a>
                 </div>
               ) : (
                 <form
@@ -139,7 +181,7 @@ export default function CtaBanner() {
                     disabled={status === "loading"}
                     className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-white btn-sky flex-shrink-0 disabled:opacity-60"
                   >
-                    {status === "loading" ? "Joining..." : "Get early access"}
+                    {status === "loading" ? "Joining..." : "Join waitlist"}
                     {status !== "loading" && <ArrowRight size={15} />}
                   </button>
                 </form>
@@ -149,12 +191,8 @@ export default function CtaBanner() {
                 <p className="mt-3 text-sm text-red-400 text-center">Something went wrong. Try again.</p>
               )}
 
-              <p className="mt-4 text-xs text-ir-muted text-center">
-                No credit card required. Cancel anytime. Your AWS account, always.
-              </p>
-
               {/* Trust badges */}
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
                 {trustBadges.map((badge) => {
                   const Icon = badge.icon;
                   return (

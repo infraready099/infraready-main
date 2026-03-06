@@ -2,6 +2,7 @@
 
 import { Check, Zap } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
+import { APP_LINKS } from "@/lib/config";
 
 const plans = [
   {
@@ -10,6 +11,7 @@ const plans = [
     period: "/mo",
     description: "Perfect for solo founders validating their first product.",
     cta: "Get started",
+    ctaHref: "getStarted" as const,
     ctaStyle: "ghost",
     popular: false,
     features: [
@@ -27,6 +29,7 @@ const plans = [
     period: "/mo",
     description: "For growing startups that need multi-environment workflows.",
     cta: "Get early access",
+    ctaHref: "getStarted" as const,
     ctaStyle: "sky",
     popular: true,
     features: [
@@ -45,6 +48,7 @@ const plans = [
     period: "",
     description: "For teams that need compliance, RBAC, and dedicated support.",
     cta: "Talk to us",
+    ctaHref: "signIn" as const,
     ctaStyle: "ghost",
     popular: false,
     features: [
@@ -176,7 +180,7 @@ export default function Pricing() {
                       </p>
 
                       <a
-                        href="#waitlist"
+                        href={APP_LINKS[plan.ctaHref]}
                         className="block w-full text-center py-3 rounded-xl text-sm font-semibold text-white btn-sky mb-7"
                       >
                         {plan.cta}
@@ -226,7 +230,7 @@ export default function Pricing() {
                 </p>
 
                 <a
-                  href="#waitlist"
+                  href={APP_LINKS[plan.ctaHref]}
                   className="block w-full text-center py-3 rounded-xl text-sm font-semibold text-ir-secondary btn-ghost hover:text-ir-text mb-7"
                 >
                   {plan.cta}

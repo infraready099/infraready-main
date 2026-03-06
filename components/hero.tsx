@@ -3,6 +3,7 @@
 import { ArrowRight, ChevronRight, Github } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { APP_LINKS } from "@/lib/config";
 
 const terminalLines = [
   { prefix: "$", text: "infraready deploy --env production", color: "text-slate-400" },
@@ -225,10 +226,10 @@ export default function Hero() {
               className="mt-9 flex flex-col sm:flex-row items-start gap-3"
             >
               <a
-                href="#waitlist"
+                href={APP_LINKS.getStarted}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white btn-sky cursor-pointer"
               >
-                Get early access
+                Start deploying free
                 <ArrowRight size={15} />
               </a>
               <a

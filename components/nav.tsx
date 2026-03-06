@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Zap, Menu, X } from "lucide-react";
+import { APP_LINKS } from "@/lib/config";
 
 const navLinks = [
   { label: "Features", href: "#features" },
@@ -69,13 +70,13 @@ export default function Nav() {
             {/* Desktop CTAs */}
             <div className="hidden md:flex items-center gap-2.5">
               <a
-                href="https://app.infraready.io"
+                href={APP_LINKS.signIn}
                 className="text-[13px] font-medium text-ir-muted hover:text-ir-text transition-colors duration-200 px-3 py-1.5 rounded-lg cursor-pointer"
               >
                 Sign in
               </a>
               <a
-                href="#waitlist"
+                href={APP_LINKS.getStarted}
                 className="text-[13px] font-semibold text-white px-4 py-1.5 rounded-lg btn-sky cursor-pointer"
               >
                 Get early access
@@ -107,13 +108,13 @@ export default function Nav() {
               ))}
               <div className="pt-2 space-y-1.5 border-t border-white/[0.06] mt-2">
                 <a
-                  href="https://app.infraready.io"
+                  href={APP_LINKS.signIn}
                   className="block text-center text-[13px] font-medium text-ir-muted py-2 rounded-lg hover:bg-white/5 transition-all duration-200 cursor-pointer"
                 >
                   Sign in
                 </a>
                 <a
-                  href="#waitlist"
+                  href={APP_LINKS.getStarted}
                   onClick={() => setMobileOpen(false)}
                   className="block text-center text-[13px] font-semibold text-white py-2 rounded-lg btn-sky cursor-pointer"
                 >
