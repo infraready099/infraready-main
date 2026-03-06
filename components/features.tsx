@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Lock,
   ShieldCheck,
@@ -6,6 +8,7 @@ import {
   Activity,
   CreditCard,
 } from "lucide-react";
+import { motion, type Variants } from "framer-motion";
 
 const features = [
   {
@@ -80,6 +83,18 @@ const accentMap: Record<string, { icon: string; border: string; glow: string }> 
   },
 };
 
+const container: Variants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.08 },
+  },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.25, 0, 0.25, 1] } },
+};
+
 export default function Features() {
   return (
     <section
@@ -95,7 +110,13 @@ export default function Features() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-80px" }}
+        >
           <p className="text-sm font-semibold text-sky-400 tracking-widest uppercase mb-3">
             Features
           </p>
@@ -107,17 +128,25 @@ export default function Features() {
             Built for founders who want production-grade infrastructure
             without hiring a DevOps engineer.
           </p>
-        </div>
+        </motion.div>
 
         {/* Feature grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+        >
           {features.map((feature) => {
             const Icon = feature.icon;
             const accent = accentMap[feature.accent] ?? accentMap.sky;
 
             return (
-              <div
+              <motion.div
                 key={feature.title}
+                variants={item}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
                 className="group relative glass-card rounded-2xl p-6 glass-card-hover cursor-default"
               >
                 {/* Icon */}
@@ -149,10 +178,10 @@ export default function Features() {
                     background: `radial-gradient(circle at 30% 20%, ${accent.glow} 0%, transparent 60%)`,
                   }}
                 />
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

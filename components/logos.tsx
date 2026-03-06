@@ -49,6 +49,9 @@ const logos = [
   },
 ];
 
+// Duplicate for seamless loop
+const marqueeLogos = [...logos, ...logos];
+
 export default function Logos() {
   return (
     <section className="py-14 border-y border-white/5" style={{ background: "rgba(255,255,255,0.015)" }}>
@@ -56,11 +59,21 @@ export default function Logos() {
         <p className="text-center text-sm font-medium text-ir-muted tracking-widest uppercase mb-10">
           Works with the tools you already use
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:gap-x-16">
-          {logos.map((logo) => (
+      </div>
+
+      {/* Marquee container */}
+      <div
+        className="relative overflow-hidden"
+        style={{
+          maskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+        }}
+      >
+        <div className="marquee-track flex items-center gap-0">
+          {marqueeLogos.map((logo, idx) => (
             <div
-              key={logo.name}
-              className="logo-item flex items-center gap-2.5 opacity-40 hover:opacity-70 transition-opacity duration-200 cursor-default"
+              key={idx}
+              className="logo-item flex items-center gap-2.5 opacity-40 hover:opacity-70 transition-opacity duration-200 cursor-default flex-shrink-0 px-8"
             >
               <span className="text-ir-secondary">{logo.icon}</span>
               <span className="text-sm font-semibold text-ir-secondary tracking-tight">

@@ -42,12 +42,17 @@ const config: Config = {
           "0%": { backgroundPosition: "-200% center" },
           "100%": { backgroundPosition: "200% center" },
         },
+        "glow-pulse": {
+          "0%, 100%": { boxShadow: "0 0 20px rgba(14,165,233,0.15)" },
+          "50%": { boxShadow: "0 0 40px rgba(14,165,233,0.35)" },
+        },
       },
       animation: {
         float: "float 4s ease-in-out infinite",
         "pulse-dot": "pulse-dot 2s ease-in-out infinite",
         "fade-up": "fade-up 0.6s ease-out forwards",
         shimmer: "shimmer 3s linear infinite",
+        "glow-pulse": "glow-pulse 3s ease-in-out infinite",
       },
       boxShadow: {
         "glow-sky": "0 0 40px rgba(14, 165, 233, 0.15)",

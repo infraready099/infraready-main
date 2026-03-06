@@ -1,4 +1,7 @@
+"use client";
+
 import { Github, ShieldCheck, Rocket } from "lucide-react";
+import { motion, type Variants } from "framer-motion";
 
 const steps = [
   {
@@ -27,6 +30,18 @@ const steps = [
   },
 ];
 
+const container: Variants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.15 },
+  },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0, 0.25, 1] } },
+};
+
 export default function HowItWorks() {
   return (
     <section
@@ -44,7 +59,13 @@ export default function HowItWorks() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-16 lg:mb-20">
+        <motion.div
+          className="text-center mb-16 lg:mb-20"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-80px" }}
+        >
           <p className="text-sm font-semibold text-sky-400 tracking-widest uppercase mb-3">
             How it works
           </p>
@@ -56,7 +77,7 @@ export default function HowItWorks() {
             From zero to production AWS infrastructure in under 20 minutes.
             No terminal required.
           </p>
-        </div>
+        </motion.div>
 
         {/* Steps */}
         <div className="relative">
@@ -66,11 +87,17 @@ export default function HowItWorks() {
             <div className="flex-1 border-t border-dashed border-sky-500/20" />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6">
+          <motion.div
+            className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6"
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+          >
             {steps.map((step, index) => {
               const Icon = step.icon;
               return (
-                <div key={step.number} className="relative flex flex-col">
+                <motion.div key={step.number} variants={item} className="relative flex flex-col">
                   {/* Step number + icon */}
                   <div className="flex lg:flex-col items-start lg:items-center gap-5 lg:gap-0 mb-6 lg:mb-8">
                     <div className="relative flex-shrink-0">
@@ -112,14 +139,20 @@ export default function HowItWorks() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
 
         {/* Bottom stat strip */}
-        <div className="mt-16 grid grid-cols-3 gap-px rounded-2xl overflow-hidden border border-white/5">
+        <motion.div
+          className="mt-16 grid grid-cols-3 gap-px rounded-2xl overflow-hidden border border-white/5"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+          viewport={{ once: true, margin: "-80px" }}
+        >
           {[
             { value: "~20 min", label: "Average deploy time" },
             { value: "11", label: "OpenTofu modules" },
@@ -136,7 +169,7 @@ export default function HowItWorks() {
               <p className="mt-1.5 text-sm text-ir-muted">{stat.label}</p>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

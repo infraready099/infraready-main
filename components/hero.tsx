@@ -1,4 +1,7 @@
+"use client";
+
 import { ArrowRight, ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const terminalLines = [
   { prefix: "$", text: "infraready deploy --env production", color: "text-slate-400" },
@@ -21,6 +24,81 @@ const terminalLines = [
   { prefix: "★", text: "Deployment complete in 18m 42s", color: "text-yellow-400" },
   { prefix: null, text: "Your app is live: https://d3xyz.cloudfront.net", color: "text-violet-400" },
 ];
+
+function AnimatedTerminal() {
+  const [visibleCount, setVisibleCount] = useState(0);
+  const [showCursor, setShowCursor] = useState(false);
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+
+    if (visibleCount < terminalLines.length) {
+      timeout = setTimeout(() => {
+        setVisibleCount((c) => c + 1);
+      }, 400);
+    } else {
+      // All lines shown — show blinking cursor, then reset after 3s
+      setShowCursor(true);
+      timeout = setTimeout(() => {
+        setShowCursor(false);
+        setVisibleCount(0);
+      }, 3000);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [visibleCount]);
+
+  return (
+    <div className="px-5 py-4 space-y-0.5 text-left overflow-hidden">
+      {terminalLines.slice(0, visibleCount).map((line, i) => {
+        if (!line.prefix && !line.text) {
+          return (
+            <div
+              key={i}
+              className="h-2 animate-fade-in-line"
+              style={{ animationDelay: "0ms" }}
+            />
+          );
+        }
+        if (!line.prefix && line.text) {
+          return (
+            <div
+              key={i}
+              className={`${line.color} font-mono terminal-line-enter`}
+            >
+              &nbsp;&nbsp;{line.text}
+            </div>
+          );
+        }
+        return (
+          <div key={i} className="flex gap-2.5 font-mono terminal-line-enter">
+            <span
+              className={
+                line.prefix === "$"
+                  ? "text-slate-500 flex-shrink-0"
+                  : line.prefix === "✓"
+                  ? "text-emerald-400 flex-shrink-0"
+                  : line.prefix === "★"
+                  ? "text-yellow-400 flex-shrink-0"
+                  : "text-sky-400 flex-shrink-0"
+              }
+            >
+              {line.prefix}
+            </span>
+            <span className={line.color}>{line.text}</span>
+          </div>
+        );
+      })}
+      {/* Blinking cursor — shown while typing or after completion */}
+      {(visibleCount < terminalLines.length || showCursor) && (
+        <div className="flex gap-2.5 font-mono mt-1">
+          <span className="text-slate-500">$</span>
+          <span className="inline-block w-2 h-4 bg-sky-400 animate-pulse" />
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Hero() {
   return (
@@ -51,7 +129,10 @@ export default function Hero() {
         <div className="flex flex-col items-center text-center">
 
           {/* Beta badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-card mb-8 border border-white/10">
+          <div
+            className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-card mb-8 border border-white/10"
+            style={{ animation: "fade-up 0.5s ease-out forwards", animationDelay: "0ms" }}
+          >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
@@ -65,7 +146,10 @@ export default function Hero() {
           </div>
 
           {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.08] max-w-4xl">
+          <h1
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.08] max-w-4xl"
+            style={{ animation: "fade-up 0.55s ease-out forwards", animationDelay: "80ms", opacity: 0 }}
+          >
             <span className="block text-ir-text">Your AI-built app</span>
             <span className="block text-ir-text">deserves real</span>
             <span className="block gradient-text mt-1">
@@ -74,7 +158,10 @@ export default function Hero() {
           </h1>
 
           {/* Subheadline */}
-          <p className="mt-8 text-base sm:text-lg text-ir-secondary max-w-2xl leading-relaxed">
+          <p
+            className="mt-8 text-base sm:text-lg text-ir-secondary max-w-2xl leading-relaxed"
+            style={{ animation: "fade-up 0.55s ease-out forwards", animationDelay: "180ms", opacity: 0 }}
+          >
             Connect GitHub. Link your AWS account. InfraReady provisions{" "}
             <span className="text-ir-text font-medium">
               VPC, RDS, ECS, S3, and CloudFront
@@ -85,10 +172,13 @@ export default function Hero() {
           </p>
 
           {/* CTAs */}
-          <div className="mt-10 flex flex-col sm:flex-row items-center gap-4">
+          <div
+            className="mt-10 flex flex-col sm:flex-row items-center gap-4"
+            style={{ animation: "fade-up 0.55s ease-out forwards", animationDelay: "260ms", opacity: 0 }}
+          >
             <a
               href="#waitlist"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-base font-semibold text-white btn-sky glow-sky"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-base font-semibold text-white btn-sky glow-sky animate-glow-pulse"
             >
               Get early access
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
@@ -103,7 +193,10 @@ export default function Hero() {
           </div>
 
           {/* Social proof */}
-          <div className="mt-10 flex items-center gap-3">
+          <div
+            className="mt-10 flex items-center gap-3"
+            style={{ animation: "fade-up 0.55s ease-out forwards", animationDelay: "340ms", opacity: 0 }}
+          >
             {/* Avatar stack */}
             <div className="flex -space-x-2.5">
               {[
@@ -128,7 +221,10 @@ export default function Hero() {
           </div>
 
           {/* Terminal mockup */}
-          <div className="mt-16 w-full max-w-2xl terminal-window glow-sky animate-float">
+          <div
+            className="mt-16 w-full max-w-2xl terminal-window glow-sky terminal-hero-wrapper"
+            style={{ animationDelay: "420ms" }}
+          >
             {/* Titlebar */}
             <div className="terminal-titlebar">
               <span className="terminal-dot bg-red-500/80" />
@@ -140,44 +236,8 @@ export default function Hero() {
               <span className="text-xs text-emerald-400 font-medium">● live</span>
             </div>
 
-            {/* Terminal body */}
-            <div className="px-5 py-4 space-y-0.5 text-left overflow-hidden">
-              {terminalLines.map((line, i) => {
-                if (!line.prefix && !line.text) {
-                  return <div key={i} className="h-2" />;
-                }
-                if (!line.prefix && line.text) {
-                  return (
-                    <div key={i} className={`${line.color} font-mono`}>
-                      &nbsp;&nbsp;{line.text}
-                    </div>
-                  );
-                }
-                return (
-                  <div key={i} className="flex gap-2.5 font-mono">
-                    <span
-                      className={
-                        line.prefix === "$"
-                          ? "text-slate-500 flex-shrink-0"
-                          : line.prefix === "✓"
-                          ? "text-emerald-400 flex-shrink-0"
-                          : line.prefix === "★"
-                          ? "text-yellow-400 flex-shrink-0"
-                          : "text-sky-400 flex-shrink-0"
-                      }
-                    >
-                      {line.prefix}
-                    </span>
-                    <span className={line.color}>{line.text}</span>
-                  </div>
-                );
-              })}
-              {/* Blinking cursor */}
-              <div className="flex gap-2.5 font-mono mt-1">
-                <span className="text-slate-500">$</span>
-                <span className="inline-block w-2 h-4 bg-sky-400 animate-pulse" />
-              </div>
-            </div>
+            {/* Animated terminal body */}
+            <AnimatedTerminal />
           </div>
         </div>
       </div>

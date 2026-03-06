@@ -1,23 +1,25 @@
 import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-async function getAudienceId(): Promise<string | null> {
-  const { data, error } = await resend.audiences.list();
-  if (error || !data?.data?.length) return null;
-  return data.data[0].id;
-}
+export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
   const { email } = await req.json();
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
   }
 
-  // Auto-fetch audience ID — no env var needed
-  const audienceId = process.env.RESEND_AUDIENCE_ID || await getAudienceId();
+  // Auto-fetch audience ID
+  let audienceId = process.env.RESEND_AUDIENCE_ID ?? null;
+  if (!audienceId) {
+    const { data, error } = await resend.audiences.list();
+    if (!error && data?.data?.length) {
+      audienceId = data.data[0].id;
+    }
+  }
   if (!audienceId) {
     return NextResponse.json({ error: "No audience found" }, { status: 500 });
   }

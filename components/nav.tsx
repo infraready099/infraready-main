@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Zap, Menu, X } from "lucide-react";
 
 const navLinks = [
@@ -11,11 +11,25 @@ const navLinks = [
 
 export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <header
-      className="sticky top-0 z-50 border-b border-white/5"
-      style={{ background: "rgba(4,9,26,0.85)", backdropFilter: "blur(20px)" }}
+      className="sticky top-0 z-50 border-b transition-all duration-300"
+      style={{
+        background: scrolled ? "rgba(4,9,26,0.95)" : "rgba(4,9,26,0.85)",
+        backdropFilter: scrolled ? "blur(28px)" : "blur(20px)",
+        borderBottomColor: scrolled ? "rgba(255,255,255,0.10)" : "rgba(255,255,255,0.05)",
+        boxShadow: scrolled ? "0 1px 24px rgba(0,0,0,0.35)" : "none",
+      }}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -48,7 +62,7 @@ export default function Nav() {
           {/* Desktop CTAs */}
           <div className="hidden md:flex items-center gap-3">
             <a
-              href="#"
+              href="https://app.infraready.io"
               className="text-sm font-medium text-ir-secondary hover:text-ir-text transition-colors duration-200 px-4 py-2 rounded-lg btn-ghost"
             >
               Sign in
@@ -86,7 +100,7 @@ export default function Nav() {
             ))}
             <div className="pt-3 space-y-2 border-t border-white/5 mt-3">
               <a
-                href="#"
+                href="https://app.infraready.io"
                 className="block text-center text-sm font-medium text-ir-secondary py-2.5 rounded-lg btn-ghost"
               >
                 Sign in

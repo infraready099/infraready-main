@@ -2,6 +2,7 @@
 
 import { ArrowRight, CheckCircle, Sparkles } from "lucide-react";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function CtaBanner() {
   const [email, setEmail] = useState("");
@@ -46,73 +47,110 @@ export default function CtaBanner() {
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/20 to-transparent" />
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-sky-500/20 mb-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-80px" }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-sky-500/20 mb-8"
+        >
           <Sparkles size={13} className="text-sky-400" />
           <span className="text-sm font-medium text-sky-400">
             Limited availability · Private beta
           </span>
-        </div>
+        </motion.div>
 
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-ir-text tracking-tight leading-[1.1]">
+        <motion.h2
+          className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-ir-text tracking-tight leading-[1.1]"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut", delay: 0.1 }}
+          viewport={{ once: true, margin: "-80px" }}
+        >
           Ready to stop{" "}
           <span className="gradient-text">fighting DevOps?</span>
-        </h2>
+        </motion.h2>
 
-        <p className="mt-6 text-lg text-ir-secondary max-w-xl mx-auto leading-relaxed">
+        <motion.p
+          className="mt-6 text-lg text-ir-secondary max-w-xl mx-auto leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut", delay: 0.2 }}
+          viewport={{ once: true, margin: "-80px" }}
+        >
           Join{" "}
           <span className="text-ir-text font-semibold">200+ founders</span> on
           the waitlist. The first 50 get{" "}
           <span className="text-emerald-400 font-semibold">
             Starter free for 3 months.
           </span>
-        </p>
+        </motion.p>
 
         {/* Form */}
-        {status === "success" ? (
-          <div className="mt-10 flex items-center justify-center gap-3 text-emerald-400">
-            <CheckCircle size={20} />
-            <span className="text-base font-medium">
-              You&apos;re on the list — check your email!
-            </span>
-          </div>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            className="mt-10 flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-          >
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@startup.io"
-              required
-              disabled={status === "loading"}
-              className="flex-1 px-5 py-3.5 rounded-xl text-sm text-ir-text placeholder-ir-muted outline-none transition-all duration-200 focus:border-sky-500/50 disabled:opacity-50"
-              style={{
-                background: "rgba(255,255,255,0.05)",
-                border: "1px solid rgba(255,255,255,0.1)",
-              }}
-            />
-            <button
-              type="submit"
-              disabled={status === "loading"}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-white btn-sky flex-shrink-0 disabled:opacity-60"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut", delay: 0.3 }}
+          viewport={{ once: true, margin: "-80px" }}
+        >
+          {status === "success" ? (
+            <div className="mt-10 flex items-center justify-center gap-3 text-emerald-400">
+              <CheckCircle size={20} />
+              <span className="text-base font-medium">
+                You&apos;re on the list — check your email!
+              </span>
+            </div>
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              className="mt-10 flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
             >
-              {status === "loading" ? "Joining..." : "Get early access"}
-              {status !== "loading" && <ArrowRight size={15} />}
-            </button>
-          </form>
-        )}
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@startup.io"
+                required
+                disabled={status === "loading"}
+                className="flex-1 px-5 py-3.5 rounded-xl text-sm text-ir-text placeholder-ir-muted outline-none transition-all duration-200 focus:border-sky-500/50 disabled:opacity-50"
+                style={{
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                }}
+              />
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-white btn-sky flex-shrink-0 disabled:opacity-60"
+              >
+                {status === "loading" ? "Joining..." : "Get early access"}
+                {status !== "loading" && <ArrowRight size={15} />}
+              </button>
+            </form>
+          )}
 
-        {status === "error" && (
-          <p className="mt-3 text-sm text-red-400">Something went wrong. Try again.</p>
-        )}
+          {status === "error" && (
+            <p className="mt-3 text-sm text-red-400">Something went wrong. Try again.</p>
+          )}
+        </motion.div>
 
-        <p className="mt-4 text-xs text-ir-muted">
+        <motion.p
+          className="mt-4 text-xs text-ir-muted"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.45, delay: 0.4 }}
+          viewport={{ once: true, margin: "-80px" }}
+        >
           No credit card required. Cancel anytime. Your AWS account, always.
-        </p>
+        </motion.p>
 
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-10">
+        <motion.div
+          className="mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-10"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut", delay: 0.45 }}
+          viewport={{ once: true, margin: "-80px" }}
+        >
           {[
             { icon: "🔒", label: "We never touch your AWS credentials" },
             { icon: "📦", label: "Your infra, your S3 state bucket" },
@@ -123,7 +161,7 @@ export default function CtaBanner() {
               <span className="text-xs text-ir-muted font-medium">{item.label}</span>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

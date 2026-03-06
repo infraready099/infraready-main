@@ -1,4 +1,7 @@
+"use client";
+
 import { Check, Zap } from "lucide-react";
+import { motion, type Variants } from "framer-motion";
 
 const plans = [
   {
@@ -56,6 +59,23 @@ const plans = [
   },
 ];
 
+const container: Variants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.12 },
+  },
+};
+
+const cardItem = (isPopular: boolean): Variants => ({
+  hidden: { opacity: 0, y: 24, scale: isPopular ? 0.98 : 1 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: isPopular ? 1.02 : 1,
+    transition: { duration: 0.5, ease: [0.25, 0, 0.25, 1] },
+  },
+});
+
 export default function Pricing() {
   return (
     <section
@@ -73,7 +93,13 @@ export default function Pricing() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-6">
+        <motion.div
+          className="text-center mb-6"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-80px" }}
+        >
           <p className="text-sm font-semibold text-sky-400 tracking-widest uppercase mb-3">
             Pricing
           </p>
@@ -81,21 +107,37 @@ export default function Pricing() {
             Simple pricing.{" "}
             <span className="gradient-text">No surprises.</span>
           </h2>
-        </div>
-        <p className="text-center text-ir-secondary mb-16 max-w-lg mx-auto text-sm">
+        </motion.div>
+        <motion.p
+          className="text-center text-ir-secondary mb-16 max-w-lg mx-auto text-sm"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+          viewport={{ once: true, margin: "-80px" }}
+        >
           We charge you a flat monthly fee.{" "}
           <span className="text-ir-text font-medium">
             You pay AWS directly
           </span>{" "}
           for the resources you use — in your own account.
-        </p>
+        </motion.p>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+        >
           {plans.map((plan) => {
             if (plan.popular) {
               return (
-                <div key={plan.name} className="relative flex flex-col">
+                <motion.div
+                  key={plan.name}
+                  variants={cardItem(true)}
+                  className="relative flex flex-col"
+                >
                   {/* Popular badge */}
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
                     <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r from-sky-500 to-violet-500">
@@ -156,13 +198,14 @@ export default function Pricing() {
                       </ul>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             }
 
             return (
-              <div
+              <motion.div
                 key={plan.name}
+                variants={cardItem(false)}
                 className="glass-card glass-card-hover rounded-2xl p-7 flex flex-col"
               >
                 <h3 className="text-lg font-bold text-ir-text mb-1">
@@ -203,19 +246,25 @@ export default function Pricing() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Footnote */}
-        <p className="text-center mt-10 text-xs text-ir-muted">
+        <motion.p
+          className="text-center mt-10 text-xs text-ir-muted"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          viewport={{ once: true, margin: "-80px" }}
+        >
           All plans include a 14-day free trial. No credit card required to
           start.{" "}
           <span className="text-ir-secondary">
             AWS resource costs billed directly by AWS to your account.
           </span>
-        </p>
+        </motion.p>
       </div>
     </section>
   );
