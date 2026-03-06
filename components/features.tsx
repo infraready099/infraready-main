@@ -1,104 +1,11 @@
 "use client";
 
-import {
-  Lock,
-  ShieldCheck,
-  Code2,
-  Layers,
-  Activity,
-  CreditCard,
-} from "lucide-react";
+import { Lock, ShieldCheck, Code2, Layers, Activity, CreditCard } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
-
-const features = [
-  {
-    icon: Lock,
-    title: "Your AWS, your rules",
-    description:
-      "Infrastructure deploys directly into YOUR AWS account. You own every resource. No vendor lock-in, no data leaving your cloud. Pull the plug anytime.",
-    accent: "sky",
-    wide: true,
-  },
-  {
-    icon: ShieldCheck,
-    title: "SOC2-ready from day one",
-    description:
-      "Least-privilege IAM roles, encryption at rest via KMS, CloudTrail audit logging, GuardDuty threat detection, and Config compliance rules — all enabled by default.",
-    accent: "violet",
-    wide: false,
-  },
-  {
-    icon: Code2,
-    title: "OpenTofu native",
-    description:
-      "Built on OpenTofu — the open-source Terraform fork with a clean MPL license. No BSL risk. Full state visibility in your own S3 bucket. Standard HCL you can read.",
-    accent: "cyan",
-    wide: false,
-  },
-  {
-    icon: Layers,
-    title: "VPC + RDS + ECS + CDN",
-    description:
-      "One click deploys your entire production stack: isolated VPC with private subnets, RDS PostgreSQL Multi-AZ, ECS Fargate, S3 storage, and CloudFront CDN.",
-    accent: "sky",
-    wide: true,
-  },
-  {
-    icon: Activity,
-    title: "Real-time deploy logs",
-    description:
-      "Watch every AWS resource being created live. No black box. You see exactly what InfraReady is doing — and you can replay or cancel at any time.",
-    accent: "emerald",
-    wide: false,
-  },
-  {
-    icon: CreditCard,
-    title: "AWS Activate compatible",
-    description:
-      "Have $10k–$100k in AWS Activate credits you can't use? InfraReady helps you activate and apply them. We're the fastest way to burn credits on real infrastructure.",
-    accent: "orange",
-    wide: false,
-  },
-];
-
-const accentMap: Record<string, { icon: string; border: string; glow: string; label: string }> = {
-  sky: {
-    icon: "text-sky-400",
-    border: "rgba(14,165,233,0.2)",
-    glow: "rgba(14,165,233,0.08)",
-    label: "text-sky-400/60",
-  },
-  violet: {
-    icon: "text-violet-400",
-    border: "rgba(167,139,250,0.2)",
-    glow: "rgba(167,139,250,0.08)",
-    label: "text-violet-400/60",
-  },
-  cyan: {
-    icon: "text-cyan-400",
-    border: "rgba(34,211,238,0.2)",
-    glow: "rgba(34,211,238,0.08)",
-    label: "text-cyan-400/60",
-  },
-  emerald: {
-    icon: "text-emerald-400",
-    border: "rgba(52,211,153,0.2)",
-    glow: "rgba(52,211,153,0.08)",
-    label: "text-emerald-400/60",
-  },
-  orange: {
-    icon: "text-orange-400",
-    border: "rgba(251,146,60,0.2)",
-    glow: "rgba(251,146,60,0.08)",
-    label: "text-orange-400/60",
-  },
-};
 
 const container: Variants = {
   hidden: {},
-  show: {
-    transition: { staggerChildren: 0.08 },
-  },
+  show: { transition: { staggerChildren: 0.07 } },
 };
 
 const item: Variants = {
@@ -106,21 +13,188 @@ const item: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.25, 0, 0.25, 1] } },
 };
 
+/** Mini architecture diagram for "Your AWS, your rules" */
+function AwsArchDiagram() {
+  return (
+    <div className="flex items-center gap-2 text-[10px] font-mono select-none mt-4 flex-wrap">
+      {["VPC", "RDS", "ECS", "S3", "CDN"].map((node, i) => (
+        <div key={node} className="flex items-center gap-2">
+          <div className="px-2 py-1 rounded-md border border-sky-500/30 bg-sky-500/10 text-sky-300 font-semibold">
+            {node}
+          </div>
+          {i < 4 && <span className="text-slate-600">→</span>}
+        </div>
+      ))}
+      <div className="ml-auto mt-1 flex items-center gap-1.5">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+        <span className="text-emerald-400/70">your account</span>
+      </div>
+    </div>
+  );
+}
+
+/** Mini infra stack for "VPC + RDS + ECS + CDN" */
+function InfraStackVisual() {
+  const layers = [
+    { label: "CloudFront CDN", color: "border-violet-500/40 bg-violet-500/10 text-violet-300" },
+    { label: "ECS Fargate (app)", color: "border-sky-500/40 bg-sky-500/10 text-sky-300" },
+    { label: "RDS PostgreSQL (Multi-AZ)", color: "border-cyan-500/40 bg-cyan-500/10 text-cyan-300" },
+    { label: "VPC + Private Subnets", color: "border-slate-500/40 bg-slate-500/10 text-slate-300" },
+  ];
+  return (
+    <div className="mt-4 space-y-1.5">
+      {layers.map((l) => (
+        <div key={l.label} className={`text-[10px] font-mono px-3 py-1.5 rounded-lg border ${l.color} flex items-center justify-between`}>
+          <span>{l.label}</span>
+          <span className="opacity-50">✓</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/** SOC2 checklist visual */
+function Soc2Visual() {
+  const items = ["GuardDuty", "CloudTrail", "KMS", "Config"];
+  return (
+    <div className="mt-4 grid grid-cols-2 gap-1.5">
+      {items.map((i) => (
+        <div key={i} className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400/80">
+          <span className="text-emerald-400">✓</span>
+          <span>{i}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/** OpenTofu HCL snippet */
+function OpenTofuSnippet() {
+  return (
+    <div className="mt-4 rounded-lg bg-black/30 border border-white/[0.06] p-3 text-[10px] font-mono leading-relaxed">
+      <span className="text-violet-400">resource</span>{" "}
+      <span className="text-sky-300">&quot;aws_vpc&quot;</span>{" "}
+      <span className="text-emerald-300">&quot;main&quot;</span>{" "}
+      <span className="text-slate-400">{"{"}</span>
+      <br />
+      <span className="text-slate-500">&nbsp;&nbsp;cidr_block</span>{" "}
+      <span className="text-slate-400">=</span>{" "}
+      <span className="text-yellow-300">&quot;10.0.0.0/16&quot;</span>
+      <br />
+      <span className="text-slate-400">{"}"}</span>
+    </div>
+  );
+}
+
+/** Live log mini preview */
+function LiveLogVisual() {
+  return (
+    <div className="mt-4 space-y-1 text-[10px] font-mono">
+      {[
+        { dot: "bg-emerald-400", text: "vpc created" },
+        { dot: "bg-emerald-400", text: "rds provisioning..." },
+        { dot: "bg-sky-400 animate-pulse", text: "ecs deploying" },
+      ].map((l, i) => (
+        <div key={i} className="flex items-center gap-2 text-slate-400">
+          <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${l.dot}`} />
+          {l.text}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/** AWS Activate credit meter */
+function ActivateVisual() {
+  return (
+    <div className="mt-4">
+      <div className="flex items-center justify-between text-[10px] font-mono mb-1.5">
+        <span className="text-slate-500">AWS Activate credits</span>
+        <span className="text-orange-400 font-semibold">$15,000</span>
+      </div>
+      <div className="h-2 rounded-full bg-white/[0.05] overflow-hidden">
+        <div
+          className="h-full rounded-full"
+          style={{
+            width: "68%",
+            background: "linear-gradient(90deg, #f97316, #fb923c)",
+          }}
+        />
+      </div>
+      <p className="text-[10px] text-slate-600 mt-1">68% credits applied to infra</p>
+    </div>
+  );
+}
+
+const cards = [
+  {
+    icon: Lock,
+    accent: { icon: "text-sky-400", border: "rgba(14,165,233,0.25)", bg: "rgba(14,165,233,0.08)" },
+    title: "Your AWS, your rules",
+    description:
+      "Infrastructure deploys directly into YOUR AWS account. You own every resource. No vendor lock-in, no data leaving your cloud.",
+    visual: <AwsArchDiagram />,
+    wide: true,
+  },
+  {
+    icon: ShieldCheck,
+    accent: { icon: "text-emerald-400", border: "rgba(52,211,153,0.25)", bg: "rgba(52,211,153,0.08)" },
+    title: "SOC2-ready from day one",
+    description:
+      "Least-privilege IAM, KMS encryption, CloudTrail, GuardDuty, and Config rules — all enabled by default.",
+    visual: <Soc2Visual />,
+    wide: false,
+  },
+  {
+    icon: Code2,
+    accent: { icon: "text-violet-400", border: "rgba(167,139,250,0.25)", bg: "rgba(167,139,250,0.08)" },
+    title: "OpenTofu native",
+    description:
+      "Open-source Terraform fork, clean MPL license. No BSL risk. Full state in your own S3 bucket.",
+    visual: <OpenTofuSnippet />,
+    wide: false,
+  },
+  {
+    icon: Layers,
+    accent: { icon: "text-cyan-400", border: "rgba(34,211,238,0.25)", bg: "rgba(34,211,238,0.08)" },
+    title: "Full production stack in one click",
+    description:
+      "VPC with private subnets, RDS Multi-AZ, ECS Fargate, S3 storage, and CloudFront CDN — provisioned together.",
+    visual: <InfraStackVisual />,
+    wide: true,
+  },
+  {
+    icon: Activity,
+    accent: { icon: "text-sky-400", border: "rgba(14,165,233,0.25)", bg: "rgba(14,165,233,0.08)" },
+    title: "Real-time deploy logs",
+    description:
+      "Watch every AWS resource created live. No black box. Cancel or replay anytime.",
+    visual: <LiveLogVisual />,
+    wide: false,
+  },
+  {
+    icon: CreditCard,
+    accent: { icon: "text-orange-400", border: "rgba(251,146,60,0.25)", bg: "rgba(251,146,60,0.08)" },
+    title: "AWS Activate compatible",
+    description:
+      "Have $10k–$100k in credits you can't use? InfraReady helps you activate and apply them fast.",
+    visual: <ActivateVisual />,
+    wide: false,
+  },
+];
+
 export default function Features() {
   return (
     <section
       id="features"
       className="py-24 lg:py-32 relative"
       style={{
-        background:
-          "linear-gradient(180deg, #04091A 0%, #060d24 50%, #04091A 100%)",
+        background: "linear-gradient(180deg, #04091A 0%, #060d24 50%, #04091A 100%)",
       }}
     >
-      {/* Dot grid overlay */}
-      <div className="absolute inset-0 dot-grid opacity-50 pointer-events-none" />
+      <div className="absolute inset-0 dot-grid opacity-40 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 24 }}
@@ -128,20 +202,19 @@ export default function Features() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           viewport={{ once: true, margin: "-80px" }}
         >
-          <p className="text-sm font-semibold text-sky-400 tracking-widest uppercase mb-3">
+          <p className="text-xs font-semibold text-sky-400 tracking-widest uppercase mb-3">
             Features
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ir-text tracking-tight">
             Everything you need.{" "}
             <span className="gradient-text">Nothing you don&apos;t.</span>
           </h2>
-          <p className="mt-4 text-ir-secondary max-w-xl mx-auto text-base">
+          <p className="mt-4 text-ir-secondary max-w-xl mx-auto text-sm">
             Built for founders who want production-grade infrastructure
             without hiring a DevOps engineer.
           </p>
         </motion.div>
 
-        {/* Bento feature grid */}
         <motion.div
           className="bento-grid"
           variants={container}
@@ -149,89 +222,39 @@ export default function Features() {
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
         >
-          {features.map((feature) => {
-            const Icon = feature.icon;
-            const accent = accentMap[feature.accent] ?? accentMap.sky;
-
-            if (feature.wide) {
-              // Wide bento card — horizontal layout
-              return (
-                <motion.div
-                  key={feature.title}
-                  variants={item}
-                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                  className="bento-wide group relative glass-card rounded-2xl p-6 glass-card-hover cursor-default flex flex-col sm:flex-row items-start gap-6 will-change-transform"
-                >
-                  {/* Icon — left aligned on wide cards */}
-                  <div
-                    className="w-14 h-14 rounded-xl flex-shrink-0 flex items-center justify-center transition-all duration-300"
-                    style={{
-                      background: accent.glow,
-                      border: `1px solid ${accent.border}`,
-                    }}
-                  >
-                    <Icon
-                      className={`w-6 h-6 ${accent.icon}`}
-                      strokeWidth={1.75}
-                    />
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-bold text-ir-text mb-2.5 tracking-tight">
-                      {feature.title}
-                    </h3>
-                    <p className="text-sm text-ir-secondary leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </div>
-
-                  {/* Hover glow spot */}
-                  <div
-                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                    style={{
-                      background: `radial-gradient(circle at 15% 50%, ${accent.glow} 0%, transparent 50%)`,
-                    }}
-                  />
-                </motion.div>
-              );
-            }
-
-            // Normal bento card — vertical layout
+          {cards.map((card) => {
+            const Icon = card.icon;
             return (
               <motion.div
-                key={feature.title}
+                key={card.title}
                 variants={item}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="group relative glass-card rounded-2xl p-6 glass-card-hover cursor-default will-change-transform"
+                whileHover={{ y: -3, transition: { duration: 0.2 } }}
+                className={`${card.wide ? "bento-wide" : ""} group relative glass-card rounded-2xl p-6 glass-card-hover cursor-default will-change-transform flex flex-col`}
               >
                 {/* Icon */}
                 <div
-                  className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 transition-all duration-300"
-                  style={{
-                    background: accent.glow,
-                    border: `1px solid ${accent.border}`,
-                  }}
+                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{ background: card.accent.bg, border: `1px solid ${card.accent.border}` }}
                 >
-                  <Icon
-                    className={`w-5 h-5 ${accent.icon}`}
-                    strokeWidth={1.75}
-                  />
+                  <Icon className={`w-5 h-5 ${card.accent.icon}`} strokeWidth={1.75} />
                 </div>
 
-                {/* Content */}
-                <h3 className="text-base font-bold text-ir-text mb-2.5 tracking-tight">
-                  {feature.title}
+                {/* Text */}
+                <h3 className="mt-4 text-base font-bold text-ir-text tracking-tight">
+                  {card.title}
                 </h3>
-                <p className="text-sm text-ir-secondary leading-relaxed">
-                  {feature.description}
+                <p className="mt-2 text-sm text-ir-secondary leading-relaxed">
+                  {card.description}
                 </p>
 
-                {/* Hover glow spot */}
+                {/* Visual content */}
+                {card.visual}
+
+                {/* Hover glow */}
                 <div
                   className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                   style={{
-                    background: `radial-gradient(circle at 30% 20%, ${accent.glow} 0%, transparent 60%)`,
+                    background: `radial-gradient(circle at 20% 20%, ${card.accent.bg} 0%, transparent 60%)`,
                   }}
                 />
               </motion.div>
